@@ -11,8 +11,9 @@ class Matricula extends Model
 
 
     protected  $table = 'tblmatriculas';
-    protected  $primarykey = 'idmatriculas';
+    protected  $primarykey = 'idMatriculas';
 
+    
     public function aluno(){
         return $this->belongsTo(Aluno::class, 'idAluno');
     }

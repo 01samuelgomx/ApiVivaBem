@@ -20,6 +20,8 @@ class FuncionarioController extends Controller
     /**
      * @return \Illuminate\Http\Response
      */
+    //------------------------------------------ 
+
     public function index()
     {
         // return ['Cheguei Aqui index'];
@@ -29,18 +31,8 @@ class FuncionarioController extends Controller
         return response()->json($funcionarios, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //------------------------------------------ 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate($this->funcionarios->RegrasFunc(), $this->funcionarios->FeedbackFunc());
@@ -58,21 +50,7 @@ class FuncionarioController extends Controller
         return response()->json($funcionarios, 200);
     }
     //------------------------------------------ 
-    /**
-     * Show the form for editing the specified resource.
-     * @param  \App\Models\Funcionario  $funcionario
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Funcionario $func)
-    {
-        //
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  Integer  $funcionario
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $funcionarios = $this->funcionarios->find($id);
@@ -84,12 +62,12 @@ class FuncionarioController extends Controller
         return response()->json($funcionarios, 200) ;
     }
 
-
     /**
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Funcionario  $funcionario
      * @return \Illuminate\Http\Response
      */
+    
     public function update(Request $request,$id)
     {
          //return 'Cheguei aqui - UPDATE';
@@ -139,11 +117,10 @@ class FuncionarioController extends Controller
        }
 
     /**
-     * Remove the specified resource from storage.
-     *
      * @param  \App\Models\Funcionario  $funcionario
      * @return \Illuminate\Http\Response
      */
+    
     public function destroy($id)
     {
         $funcionarios = $this -> funcionarios -> find($id);

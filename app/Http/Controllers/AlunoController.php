@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Aluno;
 use App\Models\Matricula;
 use App\Models\Plano;
+use App\Models\Aula;
+use App\Models\Aulamatricula;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -68,19 +70,11 @@ class AlunoController extends Controller
     }
 
     /**
-     * @param  Aluno  
-     * @return Response
-     */
-    public function edit(Aluno $aluno)
-    {
-        //
-    }
-
-    /**
      * @param  Request 
      * @param  Aluno 
      * @return Response
      */
+
     public function update(Request $request, $id)
     {
    
@@ -124,11 +118,11 @@ class AlunoController extends Controller
        return response()->json($alunos, 200);
     }
 
-
     /**
      * @param  Aluno  
      * @return Response
      */
+
     public function destroy($id)
     {
 
@@ -145,11 +139,12 @@ class AlunoController extends Controller
 
 
 // --------------------------------------------------------------------------
-//  Informação  Matricula e Plano 
+//   Matricula e Plano 
 // --------------------------------------------------------------------------
 
 // --------------------------------------------------------------------------
 //  MATRICULA
+
     public function getMatriculas($idAluno){
     $matricula = Matricula::where('idAluno',$idAluno)->first();
 
@@ -160,8 +155,10 @@ class AlunoController extends Controller
      return response()->json(['matricula' => $matricula], 200);
 
 }
+
 // --------------------------------------------------------------------------
 //  PLANO
+
     public function getPlano($idAluno){
     $matricula = Matricula::where('idAluno',$idAluno)->first();
 
@@ -172,13 +169,41 @@ class AlunoController extends Controller
      $plano = Plano::find($matricula->idPlano);
       
      if(!$plano){
-        return response()->json(['message' => 'Plano não encontradi'], 404);
+        return response()->json(['message' => 'Plano não encontrado'], 404);
      }
-
 
      return response()->json(['plano' => $plano], 200);
 
-}
+  }
+  // --------------------------------------------------------------------------
+  //  Aula
 
-    
-}
+  public function getAula($idAluno)
+  {
+      // Obter as matrículas do aluno
+      $matriculas = Matricula::where('idAluno', $idAluno)->pluck('idMatricula');
+  
+      // Verificar se não há matrículas para o aluno
+      if ($matriculas->isEmpty()) {
+          return response()->json(['message' => 'Matrículas não encontradas para o aluno'], 404);
+      }
+  
+      // Obter as aulas com base nas matrículas do aluno
+      $aulas = Aula::whereExists(function ($query) use ($idAluno) {
+
+          $query->select(DB::raw(1))
+              ->from('tblaulamatricula')
+              ->whereColumn('tblaulamatricula.idAula', 'tblaulas.idAula')
+              ->where('tblaulamatricula.idAluno', $idAluno);
+              
+      })->get();
+  
+      // Verificar se não há aulas encontradas
+      if ($aulas->isEmpty()) {
+          return response()->json(['message' => 'Aulas não encontradas para o aluno'], 404);
+      }
+  
+      // Retornar as aulas encontradas
+      return response()->json(['aulas' => $aulas], 200);
+
+  }

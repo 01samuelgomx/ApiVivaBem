@@ -18,8 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('aluno', 'App\Http\Controllers\AlunoController');
 Route::apiResource('instrutor', 'App\Http\Controllers\instrutorController');
 
+//--------------------------------------------------------------------------
 //Routes info Matricula e PLano
+//--------------------------------------------------------------------------
+
 Route::prefix('aluno')->group(function(){
 Route::get('/{id}/matricula',[AlunoController::class, 'getMatricula']);
 Route::get('/{id}/plano',[AlunoController::class, 'getPlano']);
+Route::get('/{id}/aula',[AlunoController::class, 'getAula']);
 });
