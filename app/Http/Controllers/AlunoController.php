@@ -6,10 +6,11 @@ use App\Models\Aluno;
 use App\Models\Matricula;
 use App\Models\Plano;
 use App\Models\Aula;
-use App\Models\Aulamatricula;
-use Illuminate\Contracts\Cache\Store;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Ramsey\Uuid\Type\Integer;
 
 class AlunoController extends Controller
 {
@@ -145,36 +146,46 @@ class AlunoController extends Controller
 // --------------------------------------------------------------------------
 //  MATRICULA
 
-    public function getMatriculas($idAluno){
-    $matricula = Matricula::where('idAluno',$idAluno)->first();
+public function getMatricula($idAluno){
+    // Busca a matrícula do aluno com base no ID fornecido
+    $matricula = Matricula::where('idAluno', $idAluno)->first();
 
+    // Verifica se a matrícula não foi encontrada
     if(!$matricula){
+        // Retorna uma resposta JSON indicando que a matrícula não foi encontrada, com um código de status HTTP 404 (Not Found)
         return response()->json(['messsage' => 'Matricula Não encontrada'], 404);
     }
 
-     return response()->json(['matricula' => $matricula], 200);
-
+    // Retorna uma resposta JSON contendo os detalhes da matrícula encontrada, com um código de status HTTP 200 (OK)
+    return response()->json(['matricula' => $matricula], 200);
 }
 
 // --------------------------------------------------------------------------
 //  PLANO
 
-    public function getPlano($idAluno){
+public function getPlano($idAluno){
+    // Busca a matrícula do aluno com base no ID fornecido
     $matricula = Matricula::where('idAluno',$idAluno)->first();
 
+    // Verifica se a matrícula não foi encontrada
     if(!$matricula){
+        // Retorna uma resposta JSON indicando que a matrícula não foi encontrada, com um código de status HTTP 404 (Not Found)
         return response()->json(['messsage' => 'Matricula Não encontrada'], 404);
     }
 
-     $plano = Plano::find($matricula->idPlano);
+    // Busca o plano associado à matrícula
+    $plano = Plano::find($matricula->idPlano);
       
-     if(!$plano){
+    // Verifica se o plano não foi encontrado
+    if(!$plano){
+        // Retorna uma resposta JSON indicando que o plano não foi encontrado, com um código de status HTTP 404 (Not Found)
         return response()->json(['message' => 'Plano não encontrado'], 404);
-     }
+    }
 
-     return response()->json(['plano' => $plano], 200);
+    // Retorna uma resposta JSON contendo os detalhes do plano encontrado, com um código de status HTTP 200 (OK)
+    return response()->json(['plano' => $plano], 200);
+}
 
-  }
   // --------------------------------------------------------------------------
   //  Aula
 
@@ -207,3 +218,4 @@ class AlunoController extends Controller
       return response()->json(['aulas' => $aulas], 200);
 
   }
+}
