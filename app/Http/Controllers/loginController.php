@@ -21,6 +21,8 @@ class loginController extends Controller
 
                     $usuario = Usuario::where('email', $credentials['email'])->where('senha', $credentials['senha'])->first();
 
+                    // dd($usuario);
+
                     if($usuario && $usuario->tipo_usuario_type === 'Aluno'){
 
                         $aluno = $usuario->tipo_usuario_type()->first();
@@ -43,12 +45,13 @@ class loginController extends Controller
                                         'nome' =>$aluno->nome,
                                     ],
                                  ],
-
+                                 
                                  'acess_token' => $token,
                                  'token_type' => 'Bearer',
-                             ]);
-                          }
-                     }
+                                 
+                                ]);
+                            }
+                        }
 
             return response()->json(['message' => 'Credenciais invalidas ou usuario nãó é um aluno'], 401);
 

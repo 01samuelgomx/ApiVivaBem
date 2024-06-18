@@ -13,8 +13,8 @@ class Usuario extends Authenticatetable
 {
     use HasFactory, Notifiable, HasApiTokens;
 
-    protected $primaryKey = 'id_usuario';
-    protected $table = 'usuarios';
+    protected $primaryKey = 'idUsuario';
+    protected $table = 'tblusuarios';
     protected $hidden = ['senha'];
     protected $fillable = ['nome','email', 'senha', 'tipo_usuario_id', 'tipo_usuario_type'];
 

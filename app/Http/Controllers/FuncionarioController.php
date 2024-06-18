@@ -44,6 +44,20 @@ class FuncionarioController extends Controller
         $funcionarios = $this->funcionarios->create([
             'nome' => $request->nome,
             'email' => $request->email,
+            'data_nascimento' => $request->data_nascimento,
+            'sexo' => $request->sexo,
+            'cpf' => $request->cpf,
+            'rg' => $request->rg,
+            'endereco' => $request->endereco,
+            'cidade' => $request->cidade,
+            'estado' => $request->estado,
+            'cep' => $request->cep,
+            'telefone' => $request->telefone,
+            'cargo' => $request->cargo,
+            'salario' => $request->salario,
+            'data_admissao' => $request->data_admissao,
+            'nivel' => $request->nivel,
+            'status' => $request->status,
             'foto' => $imagem_url
         ]);
 
@@ -109,8 +123,23 @@ class FuncionarioController extends Controller
            $imagem_url = $imagem -> store('imagem', 'public');
    
           $funcionarios -> update([
-               'nome' => $request->nome,
-               'foto' => $imagem_url
+            'nome' => $request->nome,
+            'email' => $request->email,
+            'data_nascimento' => $request->data_nascimento,
+            'sexo' => $request->sexo,
+            'cpf' => $request->cpf,
+            'rg' => $request->rg,
+            'endereco' => $request->endereco,
+            'cidade' => $request->cidade,
+            'estado' => $request->estado,
+            'cep' => $request->cep,
+            'telefone' => $request->telefone,
+            'cargo' => $request->cargo,
+            'salario' => $request->salario,
+            'data_admissao' => $request->data_admissao,
+            'nivel' => $request->nivel,
+            'status' => $request->status,
+            'foto' => $imagem_url
           ]); // update dos novos dados
    
           return response()->json($funcionarios, 200);

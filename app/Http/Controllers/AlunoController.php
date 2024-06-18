@@ -50,6 +50,31 @@ class AlunoController extends Controller
 
         $alunos = $this->aluno->create([
             'nome' => $request-> nome,
+            'data_nascimento' => $request->data_nascimento,
+            'sexo' => $request->sexo,
+            'cpf' => $request->cpf,
+            'rg' => $request->rg,
+            'endereco' => $request->endereco,
+            'cidade' => $request->cidade,
+            'estado' => $request->estado,
+            'cep' => $request->cep,
+            'telefone' => $request->telefone,
+            'email' => $request->email,
+            'profissao' => $request->profissao,
+            'estado_civil' => $request->estado_civil,
+            'altura' => $request->altura,
+            'peso' => $request->peso,
+            'tipo_sanguineo' => $request->tipo_sanguineo,
+            'alergias' => $request->alergias,
+            'medicamentos_uso' => $request->medicamentos_uso,
+            'cirurgias_previas' => $request->cirurgias_previas,
+            'lesoes_previas' => $request->lesoes_previas,
+            'objetivo' => $request->objetivo,
+            'frequencia_semanal' => $request->frequencia_semanal,
+            'horario_preferencial' => $request->horario_preferencial,
+            'data_matricula' => $request->data_matricula,
+            'tipo_plano' => $request->tipo_plano,
+            'status' => $request->status,
             'foto' => $imagem_url
         ]);
 
@@ -60,6 +85,7 @@ class AlunoController extends Controller
      * @param  Integer
      * @return Response
      */
+    
     public function show($id)
     {
         $alunos = $this->aluno->find($id);
@@ -113,7 +139,33 @@ class AlunoController extends Controller
 
        $alunos -> update([
             'nome' => $request->nome,
+            'data_nascimento' => $request->data_nascimento,
+            'sexo' => $request->sexo,
+            'cpf' => $request->cpf,
+            'rg' => $request->rg,
+            'endereco' => $request->endereco,
+            'cidade' => $request->cidade,
+            'estado' => $request->estado,
+            'cep' => $request->cep,
+            'telefone' => $request->telefone,
+            'email' => $request->email,
+            'profissao' => $request->profissao,
+            'estado_civil' => $request->estado_civil,
+            'altura' => $request->altura,
+            'peso' => $request->peso,
+            'tipo_sanguineo' => $request->tipo_sanguineo,
+            'alergias' => $request->alergias,
+            'medicamentos_uso' => $request->medicamentos_uso,
+            'cirurgias_previas' => $request->cirurgias_previas,
+            'lesoes_previas' => $request->lesoes_previas,
+            'objetivo' => $request->objetivo,
+            'frequencia_semanal' => $request->frequencia_semanal,
+            'horario_preferencial' => $request->horario_preferencial,
+            'data_matricula' => $request->data_matricula,
+            'tipo_plano' => $request->tipo_plano,
+            'status' => $request->status,
             'foto' => $imagem_url
+
        ]); // update dos novos dados
 
        return response()->json($alunos, 200);
