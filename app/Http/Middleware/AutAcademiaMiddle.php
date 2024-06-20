@@ -38,9 +38,9 @@ class AutAcademiaMiddle
 
                 if ($tipoUsuario instanceof Aluno) {
 
-                    $tipo = 'aluno';
+                    $tipo = 'Aluno';
                     
-                // }elseif ($tipoUsuario instanceof Administrador){
+                // }elseif ($tipoUsuario instanceof Funcionario){
 
                 //     //  dd($tipoUsuario);
                 //     $tipo = $tipoUsuario->tipoAdministrador;

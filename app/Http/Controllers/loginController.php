@@ -21,14 +21,19 @@ class loginController extends Controller
 
                     $usuario = Usuario::where('email', $credentials['email'])->where('senha', $credentials['senha'])->first();
 
-                    // dd($usuario);
-
+                    
                     if($usuario && $usuario->tipo_usuario_type === 'Aluno'){
+                        
+                        
+                        $aluno = $usuario->tipo_usuario()->first();
+                        dd($usuario);
 
-                        $aluno = $usuario->tipo_usuario_type()->first();
+
                         if($aluno){
+                            
+                            $token = $usuario->createToken('Token de acesso')->plainTextToken;
 
-                        $token = $usuario->createToken('Token de acesso')->plainTextToken;
+                            // dd($token);
 
                             return response()->json([
 

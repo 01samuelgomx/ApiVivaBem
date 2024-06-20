@@ -66,5 +66,12 @@ class Aluno extends Model
             'mimes' => 'Formatos permitidos para a foto: jpeg, png, jpg, gif',
             'max' => 'O tamanho máximo do arquivo é :max kilobytes'
         ];
+
     }
+
+    public function tipo_usuario(){
+        return $this->morphOne(Usuario::class,'tipo_usuario');
+    }
+
+
 }

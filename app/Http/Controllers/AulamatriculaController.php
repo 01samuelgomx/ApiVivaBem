@@ -9,7 +9,6 @@ use App\Http\Requests\UpdateAulamatriculaRequest;
 class AulamatriculaController extends Controller
 {
     /**
-     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
